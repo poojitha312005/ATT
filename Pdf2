@@ -1,0 +1,45 @@
+package labs;
+
+import java.awt.AWTException; 
+import java.awt.Robot; 
+import java.awt.Toolkit; 
+import java.awt.datatransfer.Clipboard; 
+import java.awt.datatransfer.StringSelection; 
+import java.awt.event.KeyEvent; 
+import org.openqa.selenium.By; 
+import org.openqa.selenium.Keys; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.WebElement; 
+import org.openqa.selenium.chrome.ChromeDriver; 
+public class week12 { 
+public static void main(String[] args) throws InterruptedException, AWTException { 
+System.setProperty("webdriver.chromedriver", "C:\\Users\\popsh\\Downloads\\chromedriver-win64\\chromedriver-win64"); 
+WebDriver driver= new ChromeDriver(); 
+driver.get("https://www.google.com/"); 
+Thread.sleep(2000); 
+WebElement searchBar = driver.findElement(By.name("q")); 
+searchBar.sendKeys("Convert word to pdf online"); 
+searchBar.sendKeys(Keys.ENTER); 
+WebElement pdfToWord = driver.findElement(By.xpath("//*[@id=\"rso\"]/div[1]/div/div/div/div[1]/div/div/span/a/h3")); 
+pdfToWord.click(); 
+Thread.sleep(2000); 
+
+WebElement chooseFileBtn = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[1]/div[4]/a/span")); 
+chooseFileBtn.click(); 
+Thread.sleep(2000); 
+Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard(); 
+StringSelection str = new StringSelection("C:\\Users\\popsh\\Downloads\\OS-MICROPROJECT[1].docx"); 
+clipboard.setContents(str,null); 
+Thread.sleep(5000); 
+Robot robot = new Robot(); 
+robot.keyPress(KeyEvent.VK_CONTROL); 
+robot.keyPress(KeyEvent.VK_V); 
+robot.keyPress(KeyEvent.VK_ENTER); 
+Thread.sleep(2000); 
+WebElement download = driver.findElement(By.xpath("/html/body/div[1]/div[1]/button"));
+download.click();
+
+WebElement download1 = driver.findElement(By.xpath("//*[@id=\"pickfiles\"]"));
+download1.click(); 
+} 
+}
